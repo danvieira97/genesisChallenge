@@ -1,18 +1,17 @@
 package router
 
 import (
+	"github.com/danvieira97/genesisChallenge/handler"
 	"github.com/gin-gonic/gin"
 )
 
 func InitializeRoutes(r *gin.Engine) {
+	basePath := "exchange"
 
-	routes := r.Group("")
+	routes := r.Group(basePath)
 	{
-		routes.GET("/genesisChallenge", func(ctx *gin.Context) {
-			ctx.JSON(200, gin.H{
-				"message": "Hi Genesis Bank",
-			})
-		})
+		routes.GET("/:amount/:from/:to/:rate", handler.CurrencyConverter)
+		routes.GET("allCurrencyConverter", handler.AllCurrencyConverter)
 	}
 
 }
