@@ -30,7 +30,5 @@ func CurrencyConverter(ctx *gin.Context) {
 }
 
 func AllCurrencyConverter(ctx *gin.Context) {
-	ctx.JSON(http.StatusOK, gin.H{
-		"message": allCurrency,
-	})
+	// repositories.UserRepository.GetAll()
 }
