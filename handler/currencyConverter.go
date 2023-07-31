@@ -3,6 +3,7 @@ package handler
 import (
 	"net/http"
 
+	"github.com/danvieira97/genesisChallenge/repositories"
 	"github.com/gin-gonic/gin"
 )
 
@@ -30,5 +31,5 @@ func CurrencyConverter(ctx *gin.Context) {
 }
 
 func AllCurrencyConverter(ctx *gin.Context) {
-	// repositories.UserRepository.GetAll()
+	repositories.ConverterRepository.GetAll()
 }
