@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/danvieira97/genesisChallenge/repositories"
@@ -31,5 +33,12 @@ func CurrencyConverter(ctx *gin.Context) {
 }
 
 func AllCurrencyConverter(ctx *gin.Context) {
-	repositories.ConverterRepository.GetAll()
+	repo := repositories.RepoGorm{}
+	allConverter, err := repo.GetAll(context.Background())
+
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	responseSuccess(ctx, "all-currency-converter", allConverter)
 }

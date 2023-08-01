@@ -9,11 +9,11 @@ import (
 	"gorm.io/gorm"
 )
 
-type repoGorm struct {
+type RepoGorm struct {
 	db *gorm.DB
 }
 
-func (repo *repoGorm) GetAll(ctx context.Context) ([]model.CurrencyConverter, error) {
+func (repo *RepoGorm) GetAll(ctx context.Context) ([]model.CurrencyConverter, error) {
 	var converters []model.CurrencyConverter
 	repo.db.Table("currency-converters").Find(&converters)
 
@@ -25,7 +25,7 @@ func (repo *repoGorm) GetAll(ctx context.Context) ([]model.CurrencyConverter, er
 	return converters, nil
 }
 
-func (repo *repoGorm) Create(ctx context.Context, newConverter model.CurrencyConverter) error {
+func (repo *RepoGorm) Create(ctx context.Context, newConverter model.CurrencyConverter) error {
 	repo.db.Table("currency-converters").Create(&newConverter)
 
 	if repo.db.Error != nil {
