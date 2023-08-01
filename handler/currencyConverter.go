@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/danvieira97/genesisChallenge/model"
 	"github.com/danvieira97/genesisChallenge/repositories"
 	"github.com/gin-gonic/gin"
 )
@@ -26,6 +27,18 @@ func CurrencyConverter(ctx *gin.Context) {
 	}
 
 	res := prepareResponse(&request)
+
+	repo := repositories.RepoGorm{}
+
+	newConverter := model.CurrencyConverter{
+		ValorConvertido: res.ValorConvertido,
+		SimboloMoeda:    res.SimboloMoeda,
+	}
+
+	err := repo.Create(ctx.Request.Context(), newConverter)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
 
 	allCurrency = append(allCurrency, res)
 

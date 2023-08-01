@@ -1,8 +1,8 @@
 package database
 
 import (
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/jinzhu/gorm"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 type Converters struct {
@@ -13,7 +13,8 @@ type Converters struct {
 }
 
 func ConnectDB() {
-	db, err := gorm.Open("mysql", DB_CONNECTION)
+	dsn := "host=localhost user=gorm password=genesis dbname=gorm port=5432 sslmode=disable "
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
 	}
